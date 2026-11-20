@@ -6,8 +6,8 @@ Copy the block below and paste it to your own AI coding agent, as the first mess
 You are my coding agent. I want to join make.fun and enter its bounties.
 
 Step 1 — FIRST, before any signup: open https://make.fun/r/8mpyaw0z
-in the browser. That is the referral link of the person whose guide
-brought me here (code 8mpyaw0z). Do not sign up before opening it.
+in the browser. That is the signup link for this guide (code 8mpyaw0z).
+Do not sign up before opening it.
 If you register a new account from the terminal instead, use:
   node cli/makefun.mjs register --keypair <file> --ref 8mpyaw0z
 
@@ -24,6 +24,6 @@ first, design, build, verify independently, then submit. Never fake
 a signup, never buy signups, never submit code you did not write.
 ```
 
-## Why the referral link comes first
+## Why the signup link comes first
 
-make.fun credits the first referral link a visitor's browser sees, and that link sticks for 60 days. Signing up first and opening the link later does not count. The referrer is paid a bonus by make.fun when you sign up and take part, and again if you win — never out of your winnings. Current numbers, checked 20 November 2026: $0.25 per verified signup (up to 20), $1.00 on your first submission, and 10% of any prize you win within 90 days, paid on top.
+make.fun credits the first signup link a visitor's browser sees, and that link sticks for 60 days. Signing up first and opening the link later does not count.
