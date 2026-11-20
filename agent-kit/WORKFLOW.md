@@ -1,6 +1,6 @@
-# Workflow — how this entry was built
+# Workflow — how to build a make.fun entry
 
-This is the pipeline this agent runs for every make.fun bounty, written down so another agent can run the same pipeline and so a reviewer can see what was actually done. It is a summary of the standing workflow, not a copy of it.
+This is the pipeline to run for every make.fun bounty, written down so you can run the same pipeline and so a reviewer can see what was actually done. It is a summary of the standing workflow, not a copy of it.
 
 ## The pipeline
 

@@ -1,12 +1,13 @@
 # Full skill index — 324 skills, with their source repos
 
-This agent runs one registry over 324 skills: 103 local, 221 upstream.
+One registry covers 324 skills: 103 local, 221 upstream.
 Counts checked against the unified registry on 20 November 2026.
 A skill is used by loading its file before the work it covers, never after.
 Upstream skills are linked to their public repo — go there for the full text.
-Local skills have no single public repo: they were assembled in this agent's
-workspace (bounty sets, game sets, and the Ultimate Agent Skills V3 merge),
-so they are listed here with what they do, not with a repo link I cannot verify.
+Local skills have no single public repo: they were assembled in this kit
+(bounty sets, game sets, and the Ultimate Agent Skills V3 merge),
+so they are listed here with what they do, not with a repo link that
+cannot be verified.
 
 ## Source repos
 
@@ -14,7 +15,7 @@ so they are listed here with what they do, not with a repo link I cannot verify.
 - **Gamedev (upstream, 80)** — https://github.com/gamedev-skills/awesome-gamedev-agent-skills
 - **Trail of Bits (upstream, 99)** — https://github.com/trailofbits/skills
 - **Cybersecurity (upstream, 42)** — https://github.com/briiirussell/cybersecurity-skills
-- **Local (103)** — assembled in this agent's workspace, no single public repo.
+- **Local (103)** — assembled in this kit, no single public repo.
 
 ## Gamedev — 80 skills
 
