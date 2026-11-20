@@ -262,9 +262,9 @@ and authorisation.
 - It never executes anything. Routing is a suggestion list; the host loads
   the skills and runs the work.
 
-## Name aliases (V3 ids that are not directories)
+## Name aliases (skill ids that are not directories)
 
-Some V3 skill ids live as sections inside another skill's file, not as
+Some skill ids live as sections inside another skill's file, not as
 their own directory. Load the host skill and read the named section.
 
 - `game-design-systems` → `game-idea-to-gdd`

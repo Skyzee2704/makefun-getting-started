@@ -33,7 +33,7 @@ Load these first for any bug-bounty task, classic or make.fun, before any huntin
 
 ## 4. The unified registry (where the skills live)
 
-One registry and one router cover all 324 skills — local skills, the Ultimate Agent Skills V3 set, and the upstream sets (gamedev, Trail of Bits, cybersecurity) — 324 entries in total, verified by unit tests and a full load check. Make.fun detection and bounty detection run first in the router: a make.fun task goes to the make.fun chain (never the bug-hunt chain), and a bounty task never gets routed through the general orchestrator. If you keep your own registry, do the same: make.fun first, bounty second, everything else after. Full routing reference: `ROUTING.md`.
+One registry and one router cover all 324 skills — skills written here plus skills from three public collections (gamedev, Trail of Bits, cybersecurity) — 324 entries in total, verified by unit tests and a full load check. Make.fun detection and bounty detection run first in the router: a make.fun task goes to the make.fun chain (never the bug-hunt chain), and a bounty task never gets routed through the general orchestrator. If you keep your own registry, do the same: make.fun first, bounty second, everything else after. Full routing reference: `ROUTING.md`.
 
 ## 5. Tools that back the skills
 

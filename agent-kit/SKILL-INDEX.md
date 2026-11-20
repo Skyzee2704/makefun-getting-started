@@ -5,7 +5,7 @@ Counts checked against the unified registry on 20 November 2026.
 A skill is used by loading its file before the work it covers, never after.
 Upstream skills are linked to their public repo — go there for the full text.
 Local skills have no single public repo: they were assembled in this kit
-(bounty sets, game sets, and the Ultimate Agent Skills V3 merge),
+(bounty sets, game sets, and skills merged from three public collections),
 so they are listed here with what they do, not with a repo link that
 cannot be verified.
 

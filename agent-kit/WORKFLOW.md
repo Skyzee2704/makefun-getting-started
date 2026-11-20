@@ -263,20 +263,20 @@ Unreal. If the entry is for a make.fun bounty, the two owner reviews apply
    production work. This is its proper place; it is never the bounty
    router.
 2. `game-idea-to-gdd` — game design document: loop, economy, balancing.
-   (Hosts the V3 section `game-design-systems`.)
+   (Also contains the `game-design-systems`.)
 3. `aaa-open-world` — the open-world lead: vertical slice, world
    partitioning, contracts between subsystems.
 4. `openworld-streaming` — chunked world, terrain, interiors, streaming.
 5. `urban-road-traffic` + `vehicle-simulation` — road graph, traffic,
    vehicles.
-6. `tune-enemy-ai` — non-combat NPCs and crowds (hosts the V3 section
+6. `tune-enemy-ai` — non-combat NPCs and crowds (also contains the
    `npc-crowd-ai`); `build-game-monster-system` and
    `design-game-encounters` for enemies and missions
-   (`design-game-encounters` hosts the V3 section `mission-dialogue`).
+   (`design-game-encounters` also contains the `mission-dialogue`).
 7. `action-wanted-system` — wanted, pursuit, reputation, and alerts.
 8. `multiplayer-networking` — only when the game is multiplayer
    (server-authoritative).
-9. `build-game-inventory` — saves and persistence (hosts the V3 section
+9. `build-game-inventory` — saves and persistence (also contains the
    `save-persistence`).
 10. Assets: Chain 5 (`blender-game-3d`, `build-hybrid-game-assets`).
 11. Engine skills from upstream gamedev, for abilities with no local
@@ -287,12 +287,12 @@ Unreal. If the entry is for a make.fun bounty, the two owner reviews apply
     `physics-tuning`, `shader-programming`, `unity-csharp-scripting`,
     `unity-physics`, `unity-navmesh`, `unreal-blueprints`,
     `unreal-cpp-gameplay`, `unreal-behavior-trees`.
-12. `optimize-threejs-games` — the optimisation workflow (hosts the V3
+12. `optimize-threejs-games` — the optimisation workflow (also contains the
     section `rendering-performance`). `threejs-performance` is only a
     supporting reference — do not merge the two.
-13. `test-playable-web-games` — playable QA (hosts the V3 section
+13. `test-playable-web-games` — playable QA (also contains the
     `production-qa`).
-14. `ship-web-games` — release and engineering/CI (hosts the V3 section
+14. `ship-web-games` — release and engineering/CI (also contains the
     `production-engineering`).
 
 ### Handoffs
@@ -363,7 +363,7 @@ a cloud browser cannot reach localhost on the VM), Gitleaks.
    `roblox-studio-workflow`, `roblox-ui`.
 7. `multiplayer-networking` — only for multiplayer outside the standard
    Roblox patterns.
-8. `test-playable-web-games` — QA (hosts the V3 section `production-qa`).
+8. `test-playable-web-games` — QA (also contains the `production-qa`).
 
 ### Handoffs
 
@@ -402,18 +402,18 @@ Selene install on demand — see `TOOLS.md`.
 ### Skill order
 
 1. `build-hybrid-game-assets` — the asset pipeline lead: brief, budget,
-   and provenance (hosts the V3 sections `game-asset-pipeline` and the
+   and provenance (also contains the `game-asset-pipeline` and the
    combined `asset-2d-ui, asset-local-ai, game-asset-pipeline` heading).
-2. `blender-game-3d` — procedural meshes (hosts the V3 section
+2. `blender-game-3d` — procedural meshes (also contains the
    `asset-3d-procedural`; the canonical Blender route).
 3. `threejs-asset-pipeline` — provenance and mesh/texture budget (hosts
-   the V3 section `asset-license-optimization`).
-4. `threejs-materials` — PBR materials (hosts the V3 section
+   the `asset-license-optimization`).
+4. `threejs-materials` — PBR materials (also contains the
    `asset-texture-material`).
-5. `build-rigged-game-assets` — rigging and animation (hosts the V3
+5. `build-rigged-game-assets` — rigging and animation (also contains the
    section `asset-rig-animation`).
 6. `build-game-audio-feedback` — sound effects, ambience, music (hosts
-   the V3 section `asset-audio`).
+   the `asset-audio`).
 7. `create-game-assets` — plan, generate, source, and validate assets,
    plus manifest and provenance (upstream gamedev).
 8. `threejs-gltf-loading` — loading glTF/GLB with DRACO, Meshopt, KTX2,
@@ -421,7 +421,7 @@ Selene install on demand — see `TOOLS.md`.
 9. `threejs-materials-lighting` — materials and lighting for Three.js
    r187 (upstream gamedev).
 10. `optimize-threejs-games` — optimisation with measured before/after
-    (hosts the V3 section `rendering-performance`).
+    (also contains the `rendering-performance`).
 11. `test-playable-web-games` — QA: import test in the target engine.
 
 ### Two AI paths — do not mix their claims
@@ -475,13 +475,13 @@ program's scope and authorisation.
 
 1. `authorized-security-review` — pre-flight scope check: scope plus
    written authorisation first.
-2. `bb-methodology` — only the V3 section `security-threat-model` inside
+2. `bb-methodology` — only the `security-threat-model` inside
    it: dataflow, roles, assets, trust boundaries.
-3. `cicd-security` — dependency and secrets inventory (hosts the V3
+3. `cicd-security` — dependency and secrets inventory (also contains the
    section `security-dependency-secrets`; enriched by
    `cybersecurity-cicd-security`, `siem-detection`, `incident-triage`).
 4. `triage-validation` — triage of SAST candidates, verification, and
-   reporting (hosts the V3 sections `security-static-analysis` and
+   reporting (also contains the `security-static-analysis` and
    `security-verification-report`).
 5. `security-arsenal` — review of your own payloads and tooling.
 6. Upstream defensive skills (registry-marked authorised-only,
@@ -671,9 +671,9 @@ through it end to end before you trust it on a big one. The workflow is
 only real when a QA verdict has actually stopped a bad entry from going
 out, and when a seal has actually been done by the builder — not the lead.
 
-## Name aliases (V3 ids that are not directories)
+## Name aliases (skill ids that are not directories)
 
-Some V3 skill ids live as sections inside another skill's file, not as
+Some skill ids live as sections inside another skill's file, not as
 their own directory. The registry maps them as aliases; load the host
 skill and read the named section.
 
