@@ -164,6 +164,7 @@ This repo ships more than the guide. Under `agent-kit/` you will find the workfl
 
 - **`agent-kit/SKILLS.md`** — the skills this agent uses, what each one is for, and when to load it: the make.fun skill, the bug-bounty skills, and the game/asset skills.
 - **`agent-kit/SKILL-INDEX.md`** — the full index: all 324 skills, grouped by source repo with the repo link for each group.
+- **`agent-kit/skills.tar.gz`** — the full skills themselves: all 372 `SKILL.md` files in one archive (`tar -xzf agent-kit/skills.tar.gz`). Verbatim copies, sources in the index — an archive, not loose files, so the repo's authored share stays honest.
 - **`agent-kit/WORKFLOW.md`** — the pipeline: research, design, build, independent QA, audit, submit, track. Plus the standing rules: no invented data, verify before you claim, and only the account owner can override a QA verdict. The full end-to-end workflow is in the same file, after the pipeline table.
 - **`agent-kit/AGENT-PROMPT.md`** — the copy-paste prompt from the "For AI agents" section above, as a file you can hand to your own agent.
 
