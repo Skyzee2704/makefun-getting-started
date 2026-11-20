@@ -167,7 +167,8 @@ This repo ships more than the guide. Under `agent-kit/` you will find the workfl
 - **`agent-kit/SKILLS.md`** — the skills this agent uses, what each one is for, and when to load it: the make.fun skill, the bug-bounty skills, and the game/asset skills.
 - **`agent-kit/SKILL-INDEX.md`** — the full index: all 324 skills, grouped by source repo with the repo link for each group.
 - **`agent-kit/skills.tar.gz`** — the full skills themselves: all 372 `SKILL.md` files in one archive (`tar -xzf agent-kit/skills.tar.gz`). Verbatim copies, sources in the index — an archive, not loose files, so the repo's authored share stays honest.
-- **`agent-kit/WORKFLOW.md`** — the real workflow: the router that picks one of five chains by task (bounty, open-world 3D, Roblox, assets, defensive security review), each chain with its exact skill order, gates, handoffs, conflicts, and blocked list, plus the recording and seal rules, the eight rules that never bend, the team shape, and the stops.
+- **`agent-kit/ROUTING.md`** — the routing reference: the decision order, all six chains with their skills in order, gates, and never-lists, mirrored from the router. Read this before `WORKFLOW.md` if you want to know which chain runs your task.
+- **`agent-kit/WORKFLOW.md`** — the real workflow: the router that picks one of six chains by task (make.fun first, then classic bounty, open-world 3D, Roblox, assets, defensive security review), each chain with its exact skill order, gates, handoffs, conflicts, and blocked list, plus the recording and seal rules, the eight rules that never bend, the team shape, and the stops.
 - **`agent-kit/AGENT-PROMPT.md`** — the copy-paste prompt from the "For AI agents" section above, as a file you can hand to your own agent.
 
 If you are an agent and you reuse this kit, the signup link used in this guide is [https://make.fun/r/8mpyaw0z](https://make.fun/r/8mpyaw0z) (code `8mpyaw0z`).

@@ -29,11 +29,11 @@ Load these first for any bug-bounty task, classic or make.fun, before any huntin
 - **blender-game-3d** — the canonical Blender route for procedural meshes: one home for modelling, with the procedural and pipeline notes folded into it.
 - **build-hybrid-game-assets, build-rigged-game-assets, build-game-vfx, build-game-audio-feedback** — assets, rigging, effects, and sound, in that order.
 - **author-game-levels, design-game-encounters, design-action-combat, dialogue-systems, build-game-inventory, build-game-map-editor** — levels, encounters, combat, dialogue, inventory, and editors.
-- **ultimate-orchestrator** — the general orchestrator for multi-skill builds. It is never the router for bounty work; bounty routing stays with the bounty skills above.
+- **ultimate-orchestrator** — the general orchestrator for multi-skill builds. It is never the router for bounty work; bounty routing stays with the bounty skills above, and make.fun routing stays with the make.fun skills.
 
 ## 4. The unified registry (where the skills live)
 
-One registry and one router cover all 324 skills — local skills, the Ultimate Agent Skills V3 set, and the upstream sets (gamedev, Trail of Bits, cybersecurity) — 324 entries in total, verified by unit tests and a full load check. Bounty detection runs first in the router, so a bounty task never gets routed through the general orchestrator. If you keep your own registry, do the same: bounty first, everything else after.
+One registry and one router cover all 324 skills — local skills, the Ultimate Agent Skills V3 set, and the upstream sets (gamedev, Trail of Bits, cybersecurity) — 324 entries in total, verified by unit tests and a full load check. Make.fun detection and bounty detection run first in the router: a make.fun task goes to the make.fun chain (never the bug-hunt chain), and a bounty task never gets routed through the general orchestrator. If you keep your own registry, do the same: make.fun first, bounty second, everything else after. Full routing reference: `ROUTING.md`.
 
 ## 5. Tools that back the skills
 

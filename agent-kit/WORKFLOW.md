@@ -2,10 +2,13 @@
 
 This is the workflow the kit actually runs on, written in full. It is not a
 summary and it is not one straight pipeline. Work starts at the router, the
-router picks one of five chains by the kind of task, and each chain names the
+router picks one of six chains by the kind of task, and each chain names the
 exact skills to load, in order, with its own gates, handoffs, conflicts, and
 blocked list. If you run a bounty through the game chain, or a game through
 the bounty chain, the work comes out wrong — the router is what stops that.
+The full routing reference — decision order, all six chains with their skills
+in order, gates, and never-lists — lives in `agent-kit/ROUTING.md`. This file
+is the workflow around it: the rules, the recording, the team, the stops.
 
 Two things outrank everything in this file. First, the standing rules in
 "The rules that never bend" below: no invented data, research first, build
@@ -19,18 +22,23 @@ they disagree.
 
 Ask the task one question at a time, in this order. The first yes wins.
 
-1. **Is it a bug bounty — classic (HackerOne, Bugcrowd, Immunefi, YesWeHack)
-   or make.fun?** Yes → Chain 1, the bounty chain. The general orchestrator
-   (`ultimate-orchestrator`) never routes bounty work. It does not matter
-   how small the bounty looks; bounty detection runs first, always.
-2. **Is it a 3D open-world game (web, Three.js, Godot, Unity, Unreal)?**
-   Yes → Chain 2.
-3. **Is it Roblox?** Yes → Chain 3.
-4. **Is it only assets — models, textures, rigs, audio — for a game?**
-   Yes → Chain 4.
-5. **Is it a security review of your own code, or code you have written
-   authorisation for, with no bounty attached?** Yes → Chain 5.
-6. **None of the above?** Use the general orchestrator
+1. **Is it make.fun?** The task mentions make.fun. Yes → Chain 2, the
+   make.fun chain. Make.fun is a **build bounty, not a bug bounty**: the
+   agent builds software, submits a repo with the transcripts that wrote
+   it, and claims USDC. The bug-hunt skills are never used here.
+2. **Is it a classic bug bounty (HackerOne, Bugcrowd, Immunefi, YesWeHack,
+   an EVM / smart-contract audit)?** Yes → Chain 1, the bounty chain. The
+   general orchestrator (`ultimate-orchestrator`) never routes bounty work.
+   It does not matter how small the bounty looks; bounty detection runs
+   first, always — after make.fun detection.
+3. **Is it a 3D open-world game (web, Three.js, Godot, Unity, Unreal)?**
+   Yes → Chain 3.
+4. **Is it Roblox?** Yes → Chain 4.
+5. **Is it only assets — models, textures, rigs, audio — for a game?**
+   Yes → Chain 5.
+6. **Is it a security review of your own code, or code you have written
+   authorisation for, with no bounty attached?** Yes → Chain 6.
+7. **None of the above?** Use the general orchestrator
    (`ultimate-orchestrator`) with the game/production skills, and end with
    the playable QA skill (`test-playable-web-games`). Never more than six
    skills in one route.
@@ -46,10 +54,11 @@ is for is in `agent-kit/SKILLS.md`; the tools behind the skills, with the
 versions this kit was tested against and where to install them, are in
 `agent-kit/TOOLS.md`.
 
-## Chain 1 — Bug bounty, classic and make.fun
+## Chain 1 — Classic bug bounty
 
 This is the only chain that hunts. Nothing else in this file is allowed to
 do bounty work, and no skill from the other chains replaces any step here.
+Make.fun is not in this chain — it has its own, Chain 2.
 
 ### Skill order, classic bounty
 
@@ -95,19 +104,6 @@ do bounty work, and no skill from the other chains replaces any step here.
    `claude-cyber-security-skills:bugcrowd-reporting` for the platform
    templates.
 
-### Skill order, make.fun
-
-1. `makefun` — read `https://make.fun/skill.md` in full first. It is the
-   whole loop: find a bounty, build the software, submit the repo with
-   the transcripts that wrote it, fix what the checks reject, claim the
-   reward in USDC on Solana.
-2. `makefun_recording_seal` — the recording and seal rules (see "Recording
-   rules" below). The recording starts before any build work.
-3. The pipeline: Analysis → Architect → Coding → QA → Audit → Submit →
-   Status Tracker. The build skills for the entry itself come from Chain 2,
-   3, or 4 depending on what the entry is — but they run under the
-   recording, under this chain's gates, never on their own.
-
 ### Handoffs between stages (classic)
 
 - **Recon → Analysis:** written scope (program, in-scope assets, what is
@@ -123,9 +119,9 @@ do bounty work, and no skill from the other chains replaces any step here.
   actually proven.
 - **Reporter → Submit:** report plus evidence. Submit only after the
   owner's approval where the two-review rule applies.
-- **Submit → Status Tracker:** watch the entry (for make.fun: a status
-  watch every 15 minutes plus a daily recap); every status change —
-  rejected, accepted, won, held, scored, outcome, payout — is reported.
+- **Submit → Status Tracker:** watch the report on the bounty platform;
+  every status change — triaged, accepted, rewarded, closed — is reported
+  to the owner.
 
 ### Gates (must all pass, in order)
 
@@ -137,16 +133,6 @@ do bounty work, and no skill from the other chains replaces any step here.
 - `triage-validation`: 7-question gate, four gates, seven brocards — one
   wrong answer kills the finding.
 - A tool that fails gives verdict UNKNOWN, never PASS.
-- Make.fun: design review by the owner before the build, and preview by
-  the owner before the submit. Submit without approval only when the
-  owner explicitly orders that submit.
-- Make.fun: the seal is done by Coding as its last step (commit and push,
-  write the usage rows, kill the recorder, wait for "sealed", then report).
-  The lead and the coordinator stay completely silent — zero tool calls —
-  from record start until Coding's result comes back. The seal is never
-  done by the lead.
-- While a recording runs, all other work pauses; after the seal, the
-  paused work restarts.
 - Every rejection or failure is studied by data — root cause, lesson, and
   the rule that stops it happening again, written into `lessons-learned.md`
   and read before the next build or submit.
@@ -155,10 +141,10 @@ do bounty work, and no skill from the other chains replaces any step here.
 
 ### Tools
 
-Foundry (`forge`, `cast`, `anvil`), Slither, Echidna, the `makefun` CLI,
-GitHub (push), GitHub Pages (game preview), Gitleaks (secret scan before
-any push). Upstream tools (trailmark, Semgrep, CodeQL, yara-x, AFL++) only
-when installed — never claim one ran when it did not. See `TOOLS.md`.
+Foundry (`forge`, `cast`, `anvil`), Slither, Echidna, GitHub (push),
+Gitleaks (secret scan before any push). Upstream tools (trailmark, Semgrep,
+CodeQL, yara-x, AFL++) only when installed — never claim one ran when it
+did not. See `TOOLS.md`.
 
 ### Blocked / never in this chain
 
@@ -172,12 +158,100 @@ when installed — never claim one ran when it did not. See `TOOLS.md`.
 - `second-opinion`: sends diffs to an external CLI — never for a repo with
   secrets or sensitive code.
 - `ultimate-orchestrator` routing bounty work — the router forbids it.
+- `makefun` / `makefun_recording_seal` in this chain — make.fun has its
+  own chain, Chain 2.
 - `authorized-security-review` or `security-fuzz-property` standing in for
   the offensive bounty skills.
 - Submitting without passing `triage-validation`.
 - `humanizer` changing code, data, or numbers — it only rewrites prose.
 
-## Chain 2 — Open-world 3D game
+## Chain 2 — Make.fun, build bounty
+
+Make.fun is not a bug bounty. The agent builds software; the bug-hunt chain
+is never used here — unless the make.fun bounty itself asks for an audit,
+and then the audit skills run as **build** skills, not hunt skills.
+
+### Skill order
+
+1. `makefun` — read `https://make.fun/skill.md` in full first. It is the
+   whole loop: find a bounty, build the software, submit the repo with
+   the transcripts that wrote it, fix what the checks reject, claim the
+   reward in USDC on Solana.
+2. `makefun_recording_seal` — the recording and seal rules (see "Recording
+   rules" below). The recording starts before any build work.
+3. The pipeline: Analysis → Architect → Coding → QA → Audit → Submit →
+   Status Tracker. The build skills for the entry itself come from Chain 3,
+   4, or 5 depending on what the entry is — but they run under the
+   recording, under this chain's gates, never on their own.
+
+### Handoffs between stages
+
+- **Analysis → Architect:** triage in writing (prize, deadline, fee,
+  feasibility, score/rank target) plus a go / no-go with reasons, by data.
+- **Architect → Coding:** the full design (what is built, in what order,
+  what "done" looks like, trade-offs) plus the owner's design approval.
+- **Coding → QA:** code plus README, committed, in the recorded session,
+  plus proof it ran.
+- **QA → Audit:** QA's verdict (pass / fail, with reasons). Only the
+  account owner may override a QA verdict.
+- **Audit → Submit:** audit's go / no-go verdict plus the preview the
+  owner approved.
+- **Submit → Status Tracker:** submission ID and claim code recorded; the
+  entry is watched (a status watch every 15 minutes plus a daily recap);
+  every status change — rejected, accepted, won, held, scored, outcome,
+  payout — is reported to the owner.
+
+### Gates (must all pass, in order)
+
+- Read the make.fun skill in full first; read the bounty's requirements to
+  the end before writing anything.
+- The recording runs before any build work; build in the top-level chat the
+  owner opened, with the first message as the build prompt.
+- Design review by the owner before the build, and preview by the owner
+  before the submit. Submit without approval only when the owner
+  explicitly orders that submit.
+- The seal is done by Coding as its last step (commit and push, write the
+  usage rows, kill the recorder, wait for "sealed", then report). The lead
+  and the coordinator stay completely silent — zero tool calls — from
+  record start until Coding's result comes back. The seal is never done by
+  the lead.
+- While a recording runs, all other work pauses; after the seal, the
+  paused work restarts.
+- The local check passes before submit. A refused submission still eats
+  daily quota, so the check is not optional. Authored share at least 30%
+  (working target: 95% or more).
+- The system prompt and the instruction files are uploaded with the entry.
+  Hiding them is a rejection since 18 November 2026, 12:00 UTC.
+- Every rejection or failure is studied by data — root cause, lesson, and
+  the rule that stops it happening again, written into `lessons-learned.md`
+  and read before the next build or submit.
+- No invented data: numbers, dates, scores, ranks, and prices come only
+  from something read, checked live, or measured.
+
+### Tools
+
+The `makefun` CLI (bundle, check, submit, status, claim), GitHub (push),
+GitHub Pages (game preview), Gitleaks (secret scan before any push),
+Foundry (when the entry needs EVM), Godot / Blender / Rojo (when the entry
+is a game — see the chain for that entry type).
+
+### Blocked / never in this chain
+
+- Building outside the recording is unwitnessed; submitting an unwitnessed
+  commit means rebuilding under a live recording.
+- The account's daily entry quota can be lowered by reputation (the daily
+  cap is not a fixed number) — check `status --competition` before
+  submitting; when `can_submit` is false, do not submit (the server
+  refuses, and no retry passes).
+- Testing a target outside the bounty's scope is forbidden.
+- `bb-methodology`, `bug-bounty-null200ok`, `evm-audit-skills`, and
+  `triage-validation` as a hunt chain for a make.fun entry.
+- `ultimate-orchestrator` routing classic bounty work — that is the other
+  chain's rule, and it stays.
+- Submitting without passing QA and Audit and the owner's preview.
+- The seal done by the lead or the coordinator.
+
+## Chain 3 — Open-world 3D game
 
 Use this for a 3D open-world game on web (Three.js), Godot, Unity, or
 Unreal. If the entry is for a make.fun bounty, the two owner reviews apply
@@ -204,7 +278,7 @@ Unreal. If the entry is for a make.fun bounty, the two owner reviews apply
    (server-authoritative).
 9. `build-game-inventory` — saves and persistence (hosts the V3 section
    `save-persistence`).
-10. Assets: Chain 4 (`blender-game-3d`, `build-hybrid-game-assets`).
+10. Assets: Chain 5 (`blender-game-3d`, `build-hybrid-game-assets`).
 11. Engine skills from upstream gamedev, for abilities with no local
     equivalent: `godot-3d-essentials`, `godot-gdscript`, `godot-physics`,
     `godot-animation`, `godot-multiplayer`, `godot-export`,
@@ -267,7 +341,7 @@ a cloud browser cannot reach localhost on the VM), Gitleaks.
   no-paid-API path is `asset-local-ai` (a section in
   `build-hybrid-game-assets`).
 
-## Chain 3 — Roblox
+## Chain 4 — Roblox
 
 ### Skill order
 
@@ -323,7 +397,7 @@ Selene install on demand — see `TOOLS.md`.
   passed" from this VM. What can be shown from here: the Rojo build
   passes, lint passes, the project structure is valid.
 
-## Chain 4 — Asset pipeline (Blender → Godot / Three.js)
+## Chain 5 — Asset pipeline (Blender → Godot / Three.js)
 
 ### Skill order
 
@@ -389,7 +463,7 @@ root — record it when it fails), ffmpeg 8.1.2, Gitleaks.
 - Material Maker, Blockbench, Pixelorama install on demand — record NOT
   RUN when a step needs one and it is not installed.
 
-## Chain 5 — Authorised security review (defensive, never a bounty)
+## Chain 6 — Authorised security review (defensive, never a bounty)
 
 Use this for a security review of your own code, or a target with written
 authorisation, and no bounty attached. This is not a bounty hunt: it never
