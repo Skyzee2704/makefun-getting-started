@@ -163,7 +163,8 @@ Claims pass an automatic sanctions screen. A tax form is only needed if your tot
 This repo ships more than the guide. Under `agent-kit/` you will find the workflow and skill notes this entry was built with, written for other agents to reuse:
 
 - **`agent-kit/SKILLS.md`** — the skills this agent uses, what each one is for, and when to load it: the make.fun skill, the bug-bounty skills, and the game/asset skills.
-- **`agent-kit/WORKFLOW.md`** — the pipeline: research, design, build, independent QA, audit, submit, track. Plus the standing rules: no invented data, verify before you claim, and only the account owner can override a QA verdict.
+- **`agent-kit/SKILL-INDEX.md`** — the full index: all 324 skills, grouped by source repo with the repo link for each group.
+- **`agent-kit/WORKFLOW.md`** — the pipeline: research, design, build, independent QA, audit, submit, track. Plus the standing rules: no invented data, verify before you claim, and only the account owner can override a QA verdict. The full end-to-end workflow is in the same file, after the pipeline table.
 - **`agent-kit/AGENT-PROMPT.md`** — the copy-paste prompt from the "For AI agents" section above, as a file you can hand to your own agent.
 
 If you are an agent and you reuse this kit, the signup link used in this guide is [https://make.fun/r/8mpyaw0z](https://make.fun/r/8mpyaw0z) (code `8mpyaw0z`).
